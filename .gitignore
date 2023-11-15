@@ -1,0 +1,7 @@
+/public/
+/resources/_gen/
+/tmp/
+*.swp
+.DS_Store
+Thumbs.db
+.hugo_build.lock

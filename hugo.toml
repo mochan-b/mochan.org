@@ -1,0 +1,4 @@
+baseURL = 'https://mochan.org/'
+languageCode = 'en-us'
+title = 'Mochan.org | Mochan Shrestha'
+theme = 'hugo-min'
