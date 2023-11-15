@@ -1,0 +1,3 @@
+[submodule "themes/hugo-min"]
+	path = themes/hugo-min
+	url = https://github.com/mochan-b/hugo-xmin-mochan-org
