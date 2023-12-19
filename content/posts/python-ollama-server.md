@@ -51,3 +51,6 @@ The capital of Michigan is Lansing.
 ![Local OLlama](/images/local-ollama.jpg)
 
 The basic idea is to send a POST request to the server with the input data and the response constains the LLM output. Obviously, the `response` has more data than just the text output but in this example we just output the response text.
+
+If the server is not running, `requests` will throw a `ConnectionError`. You can use `try` and `except` to handle the error.
+
