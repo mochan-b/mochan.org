@@ -358,6 +358,81 @@ for idx in indices:
     print(f"Sample {idx:4d} — true label: {label}  |  predicted: {pred}")
 ```
 
+## Miscellaneous Tips
+
+### Delete an experiment
+
+You can delete an experiment with the delete button but it is only a soft delete and if you try to use the same experiment name, you will get an error 
+
+```bash
+mlflow.exceptions.MlflowException: Cannot set a deleted experiment 'test_experiment' as the active experiment. You can restore the experiment, or permanently delete the experiment to create a new one.
+```
+
+If you're using the `sqlite` backend, you can delete the experiment from the database directly. The following script will delete all experiments and runs that are in the `deleted` lifecycle stage.
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Usage: purge_mlflow_orphans.sh [DB_FILE] [ARTIFACT_ROOT]
+DB_FILE="${1:-mlflow.db}"
+ARTIFACT_ROOT="${2:-./artifacts}"
+
+echo "Using SQLite DB:     $DB_FILE"
+echo "Artifacts directory: $ARTIFACT_ROOT"
+echo
+
+# 1) Find soft-deleted experiments
+mapfile -t DELETED_EXPS < <(
+  sqlite3 "$DB_FILE" \
+    "SELECT experiment_id FROM experiments WHERE lifecycle_stage = 'deleted';"
+)
+
+# 2) Purge experiments and runs, and drop any runs whose experiment_id no longer exists
+echo "Purging deleted experiments and orphaned runs/metadata..."
+sqlite3 "$DB_FILE" <<-SQL
+  -- remove soft-deleted experiments
+  DELETE FROM experiments WHERE lifecycle_stage = 'deleted';
+
+  -- remove runs explicitly soft-deleted
+  DELETE FROM runs WHERE lifecycle_stage = 'deleted';
+
+  -- remove runs pointing to missing experiments
+  DELETE FROM runs 
+    WHERE experiment_id NOT IN (SELECT experiment_id FROM experiments);
+
+  -- remove any metrics/params/tags for runs that no longer exist
+  DELETE FROM metrics WHERE run_uuid NOT IN (SELECT run_uuid FROM runs);
+  DELETE FROM params  WHERE run_uuid NOT IN (SELECT run_uuid FROM runs);
+  DELETE FROM tags    WHERE run_uuid NOT IN (SELECT run_uuid FROM runs);
+
+  -- reclaim free space
+  VACUUM;
+SQL
+echo "✔ Database cleanup complete."
+echo
+
+# 3) Delete artifact folders for all experiments that were soft-deleted
+if [ ${#DELETED_EXPS[@]} -gt 0 ]; then
+  echo "Removing artifact folders for deleted experiments..."
+  for EXP_ID in "${DELETED_EXPS[@]}"; do
+    ART_DIR="$ARTIFACT_ROOT/$EXP_ID"
+    if [ -d "$ART_DIR" ]; then
+      rm -rf "$ART_DIR"
+      echo "  • Deleted artifacts: $ART_DIR"
+    else
+      echo "  • No artifacts found for experiment $EXP_ID"
+    fi
+  done
+  echo
+else
+  echo "No soft-deleted experiments found; skipping artifact removal."
+  echo
+fi
+
+echo "All orphaned and deleted MLflow data has been purged."
+```
+
 ## Conclusion
 
 The code is given in the repository [here](https://github.com/mochan-b/mlflow-wandb-tutorial).
