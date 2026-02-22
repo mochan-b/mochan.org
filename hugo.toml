@@ -2,3 +2,12 @@ baseURL = 'https://mochan.org/'
 languageCode = 'en-us'
 title = 'Mochan.org | Mochan Shrestha'
 theme = 'hugo-min'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)'], ['$', '$']]
