@@ -1,0 +1,76 @@
+<svg width="600" height="700" viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .box { fill: #f8fafc; stroke: #94a3b8; stroke-width: 2px; rx: 8px; }
+      .vla { fill: #e0f2fe; stroke: #38bdf8; }
+      .rl-token { fill: #fef3c7; stroke: #fbbf24; }
+      .decoder { fill: #f3e8ff; stroke: #c084fc; }
+      .loss { fill: #ffe4e6; stroke: #f43f5e; stroke-dasharray: 4; }
+      .text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #334155; }
+      .title { font-weight: 600; font-size: 16px; }
+      .label { font-size: 13px; fill: #64748b; }
+      .label-right { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #64748b; text-anchor: start; }
+      .arrow { stroke: #94a3b8; stroke-width: 2px; fill: none; marker-end: url(#arrowhead); }
+      .arrow-dashed { stroke: #f43f5e; stroke-width: 2px; fill: none; stroke-dasharray: 6,4; marker-end: url(#arrowhead-red); }
+      .line-only { stroke: #94a3b8; stroke-width: 2px; fill: none; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />
+    </marker>
+    <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f43f5e" />
+    </marker>
+  </defs>
+
+  <!-- Background for visibility in both dark and light modes -->
+  <rect width="100%" height="100%" fill="#ffffff" rx="12" />
+
+  <!-- Inputs -->
+  <rect x="70" y="40" width="220" height="60" class="box vla" />
+  <text x="180" y="68" class="text title">VLA Final-layer</text>
+  <text x="180" y="88" class="text title">Embeddings (z₁, ..., z_M)</text>
+
+  <rect x="310" y="40" width="220" height="60" class="box rl-token" />
+  <text x="420" y="68" class="text title">Learned RL</text>
+  <text x="420" y="88" class="text title">Embedding &lt;rl&gt;</text>
+
+  <path d="M 180 100 L 180 120 L 300 120 L 300 134" class="arrow" />
+  <path d="M 420 100 L 420 120 L 300 120" class="line-only" />
+
+  <!-- Append Sequence -->
+  <rect x="210" y="140" width="180" height="46" class="box" />
+  <text x="300" y="168" class="text title">Augmented Sequence</text>
+
+  <line x1="300" y1="186" x2="300" y2="240" class="arrow" />
+
+  <!-- Encoder -->
+  <rect x="180" y="240" width="240" height="60" class="box rl-token" />
+  <text x="300" y="268" class="text title">Lightweight</text>
+  <text x="300" y="288" class="text title">Encoder Transformer</text>
+
+  <line x1="300" y1="300" x2="300" y2="360" class="arrow" />
+  <text x="315" y="335" class="label-right">(Information Bottleneck)</text>
+
+  <!-- RL Token -->
+  <rect x="220" y="360" width="160" height="54" class="box rl-token" />
+  <text x="300" y="393" class="text title">RL Token</text>
+
+  <line x1="300" y1="414" x2="300" y2="474" class="arrow" />
+
+  <!-- Decoder -->
+  <rect x="160" y="474" width="280" height="60" class="box decoder" />
+  <text x="300" y="502" class="text title">Decoder Transformer</text>
+  <text x="300" y="522" class="text label">(Discarded after training)</text>
+
+  <line x1="300" y1="534" x2="300" y2="594" class="arrow" />
+
+  <!-- Reconstructed -->
+  <rect x="160" y="594" width="280" height="60" class="box vla" />
+  <text x="300" y="622" class="text title">Reconstructed</text>
+  <text x="300" y="642" class="text title">Embeddings (ẑ₁, ..., ẑ_M)</text>
+
+  <!-- Loss Arrow -->
+  <path d="M 70 70 L 40 70 L 40 624 L 150 624" class="arrow-dashed" />
+  <text x="30" y="347" class="text title" style="fill: #f43f5e;" transform="rotate(-90 30,347)">Reconstruction Loss</text>
+
+</svg>
