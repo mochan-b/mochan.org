@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 550" width="400" height="400">
+  <!-- Definitions -->
+  <defs>
+    <pattern id="grid1" width="100" height="100" patternUnits="userSpaceOnUse" x="50" y="50">
+      <rect width="100" height="100" fill="none" stroke="#4a90e2" stroke-width="2"/>
+    </pattern>
+    <pattern id="grid2" width="100" height="100" patternUnits="userSpaceOnUse" x="75" y="75">
+      <rect width="100" height="100" fill="none" stroke="#e94e77" stroke-width="2"/>
+    </pattern>
+  </defs>
+
+  <!-- Highlight Active Tile for Grid 1 -->
+  <rect x="150" y="150" width="100" height="100" fill="#4a90e2" fill-opacity="0.3" stroke="#4a90e2" stroke-width="4"/>
+  
+  <!-- Highlight Active Tile for Grid 2 -->
+  <rect x="175" y="175" width="100" height="100" fill="#e94e77" fill-opacity="0.3" stroke="#e94e77" stroke-width="4"/>
+
+  <!-- Tiling 1 (Blue) -->
+  <rect x="50" y="50" width="400" height="400" fill="url(#grid1)" stroke="#4a90e2" stroke-width="3"/>
+
+  <!-- Tiling 2 (Red) -->
+  <rect x="75" y="75" width="400" height="400" fill="url(#grid2)" stroke="#e94e77" stroke-width="3"/>
+
+  <!-- State Point -->
+  <circle cx="220" cy="210" r="8" fill="#888888" stroke="#aaaaaa" stroke-width="2"/>
+  <text x="235" y="215" font-family="sans-serif" font-size="18" font-weight="bold" fill="#888888">State s</text>
+  
+  <!-- Legend -->
+  <rect x="50" y="490" width="20" height="20" fill="none" stroke="#4a90e2" stroke-width="3"/>
+  <text x="80" y="505" font-family="sans-serif" font-size="16" fill="#888888">Tiling 1</text>
+  
+  <rect x="170" y="490" width="20" height="20" fill="none" stroke="#e94e77" stroke-width="3"/>
+  <text x="200" y="505" font-family="sans-serif" font-size="16" fill="#888888">Tiling 2</text>
+  
+  <rect x="290" y="490" width="20" height="20" fill="#4a90e2" fill-opacity="0.3" stroke="#4a90e2" stroke-width="2"/>
+  <text x="320" y="505" font-family="sans-serif" font-size="16" fill="#888888">Active Tile 1</text>
+  
+  <rect x="430" y="490" width="20" height="20" fill="#e94e77" fill-opacity="0.3" stroke="#e94e77" stroke-width="2"/>
+  <text x="460" y="505" font-family="sans-serif" font-size="16" fill="#888888">Active Tile 2</text>
+</svg>

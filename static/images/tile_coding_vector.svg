@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 468 310" width="468" height="310">
+  <defs>
+    <style>
+      .text-main { font-family: sans-serif; font-size: 16px; fill: #888888; text-anchor: middle; }
+      .text-bold { font-family: sans-serif; font-size: 16px; font-weight: bold; fill: #888888; text-anchor: middle; }
+      .text-small { font-family: sans-serif; font-size: 14px; fill: #888888; text-anchor: middle; }
+      .text-dark { font-family: sans-serif; font-size: 14px; font-weight: bold; fill: #555555; text-anchor: middle; }
+      .cell-t1 { fill: none; stroke: #4a90e2; stroke-width: 2; }
+      .cell-t1-active { fill: #4a90e2; fill-opacity: 0.3; stroke: #4a90e2; stroke-width: 2; }
+      .cell-t2 { fill: none; stroke: #e94e77; stroke-width: 2; }
+      .cell-t2-active { fill: #e94e77; fill-opacity: 0.3; stroke: #e94e77; stroke-width: 2; }
+      .cell-w { fill: none; stroke: #aaaaaa; stroke-width: 2; }
+      .cell-w-active { fill: none; stroke: #555555; stroke-width: 3; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#888888" />
+    </marker>
+  </defs>
+
+  <!-- Title Tiling 1 -->
+  <text x="114" y="25" class="text-bold">Tiling 1 (i=1)</text>
+  <!-- Cells Tiling 1 -->
+  <rect x="50" y="35" width="32" height="32" class="cell-t1"/>
+  <rect x="82" y="35" width="32" height="32" class="cell-t1"/>
+  <rect x="114" y="35" width="32" height="32" class="cell-t1-active"/>
+  <rect x="146" y="35" width="32" height="32" class="cell-t1"/>
+  <!-- Values -->
+  <text x="66" y="57" class="text-main">0</text>
+  <text x="98" y="57" class="text-main">0</text>
+  <text x="130" y="57" class="text-bold" fill="#4a90e2">1</text>
+  <text x="162" y="57" class="text-main">0</text>
+  <!-- Labels -->
+  <text x="66" y="82" class="text-small">φ₁‚₁</text>
+  <text x="98" y="82" class="text-small">φ₁‚₂</text>
+  <text x="130" y="82" class="text-small">φ₁‚₃</text>
+  <text x="162" y="82" class="text-small">φ₁‚₄</text>
+
+  <!-- Title Tiling 2 -->
+  <text x="354" y="25" class="text-bold">Tiling 2 (i=2)</text>
+  <!-- Cells Tiling 2 -->
+  <rect x="290" y="35" width="32" height="32" class="cell-t2"/>
+  <rect x="322" y="35" width="32" height="32" class="cell-t2-active"/>
+  <rect x="354" y="35" width="32" height="32" class="cell-t2"/>
+  <rect x="386" y="35" width="32" height="32" class="cell-t2"/>
+  <!-- Values -->
+  <text x="306" y="57" class="text-main">0</text>
+  <text x="338" y="57" class="text-bold" fill="#e94e77">1</text>
+  <text x="370" y="57" class="text-main">0</text>
+  <text x="402" y="57" class="text-main">0</text>
+  <!-- Labels -->
+  <text x="306" y="82" class="text-small">φ₂‚₁</text>
+  <text x="338" y="82" class="text-small">φ₂‚₂</text>
+  <text x="370" y="82" class="text-small">φ₂‚₃</text>
+  <text x="402" y="82" class="text-small">φ₂‚₄</text>
+
+  <!-- Arrows -->
+  <path d="M 130 90 L 186 120" stroke="#888888" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 338 90 L 282 120" stroke="#888888" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Concatenated Vector Title -->
+  <text x="234" y="125" class="text-bold">Concatenated Feature Vector φ(s) = ∇_w v(s, w)</text>
+  <!-- Combined Vector -->
+  <rect x="106" y="135" width="32" height="32" class="cell-t1"/>
+  <rect x="138" y="135" width="32" height="32" class="cell-t1"/>
+  <rect x="170" y="135" width="32" height="32" class="cell-t1-active"/>
+  <rect x="202" y="135" width="32" height="32" class="cell-t1"/>
+  
+  <rect x="234" y="135" width="32" height="32" class="cell-t2"/>
+  <rect x="266" y="135" width="32" height="32" class="cell-t2-active"/>
+  <rect x="298" y="135" width="32" height="32" class="cell-t2"/>
+  <rect x="330" y="135" width="32" height="32" class="cell-t2"/>
+  <!-- Combined Values -->
+  <text x="122" y="157" class="text-main">0</text>
+  <text x="154" y="157" class="text-main">0</text>
+  <text x="186" y="157" class="text-bold" fill="#4a90e2">1</text>
+  <text x="218" y="157" class="text-main">0</text>
+  <text x="250" y="157" class="text-main">0</text>
+  <text x="282" y="157" class="text-bold" fill="#e94e77">1</text>
+  <text x="314" y="157" class="text-main">0</text>
+  <text x="346" y="157" class="text-main">0</text>
+
+  <!-- Weights Title -->
+  <text x="234" y="205" class="text-bold">Weight Vector w</text>
+  <!-- Weights -->
+  <rect x="106" y="215" width="32" height="32" class="cell-w"/>
+  <rect x="138" y="215" width="32" height="32" class="cell-w"/>
+  <rect x="170" y="215" width="32" height="32" class="cell-w-active"/>
+  <rect x="202" y="215" width="32" height="32" class="cell-w"/>
+  
+  <rect x="234" y="215" width="32" height="32" class="cell-w"/>
+  <rect x="266" y="215" width="32" height="32" class="cell-w-active"/>
+  <rect x="298" y="215" width="32" height="32" class="cell-w"/>
+  <rect x="330" y="215" width="32" height="32" class="cell-w"/>
+  <!-- Weight Labels -->
+  <text x="122" y="237" class="text-small">w₁‚₁</text>
+  <text x="154" y="237" class="text-small">w₁‚₂</text>
+  <text x="186" y="237" class="text-dark">w₁‚₃</text>
+  <text x="218" y="237" class="text-small">w₁‚₄</text>
+  <text x="250" y="237" class="text-small">w₂‚₁</text>
+  <text x="282" y="237" class="text-dark">w₂‚₂</text>
+  <text x="314" y="237" class="text-small">w₂‚₃</text>
+  <text x="346" y="237" class="text-small">w₂‚₄</text>
+
+  <!-- Output text -->
+  <text x="234" y="285" class="text-bold" fill="#888888">Value Calculation: v(s) = w₁‚₃ + w₂‚₂</text>
+</svg>
