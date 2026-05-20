@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" style="background-color: #ffffff; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; border-radius: 8px;">
+  <!-- Definitions -->
+  <defs>
+    <style>
+      .title { font-size: 28px; font-weight: bold; fill: #212529; }
+      .subtitle { font-size: 16px; fill: #495057; }
+      .math-box { fill: #f8f9fa; stroke: #dee2e6; stroke-width: 2px; rx: 8px; }
+      .math-text { font-size: 18px; font-family: 'Courier New', Courier, monospace; font-weight: bold; fill: #343a40; }
+      .math-desc { font-size: 14px; fill: #868e96; font-style: italic; }
+      
+      .axis { stroke: #ced4da; stroke-width: 2px; }
+      .grid { stroke: #dee2e6; stroke-width: 1px; stroke-dasharray: 4,4; }
+      .tick-label { font-size: 13px; fill: #495057; text-anchor: middle; }
+      .axis-label { font-size: 14px; font-weight: bold; fill: #343a40; text-anchor: middle; }
+      
+      .trust-region { fill: #e7f5ff; opacity: 0.6; }
+      
+      .line-unclipped { stroke: #adb5bd; stroke-width: 2px; stroke-dasharray: 6,4; fill: none; }
+      
+      .pos-title { font-size: 18px; font-weight: bold; fill: #2b8a3e; text-anchor: middle; }
+      .pos-line { stroke: #2b8a3e; stroke-width: 4px; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .pos-dot { fill: #2b8a3e; }
+      .pos-text { font-size: 14px; fill: #2b8a3e; font-weight: bold; }
+      
+      .neg-title { font-size: 18px; font-weight: bold; fill: #c92a2a; text-anchor: middle; }
+      .neg-line { stroke: #c92a2a; stroke-width: 4px; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .neg-dot { fill: #c92a2a; }
+      .neg-text { font-size: 14px; fill: #c92a2a; font-weight: bold; }
+
+      .box-shadow { filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.05)); }
+      .intuition-box { fill: #fff; stroke: #e9ecef; stroke-width: 1.5px; rx: 6px; }
+      .intuition-title { font-size: 14px; font-weight: bold; fill: #495057; }
+      .intuition-text { font-size: 13px; fill: #495057; }
+    </style>
+  </defs>
+
+  <!-- Header -->
+  <text x="500" y="45" class="title" text-anchor="middle">The PPO Clipped Surrogate Objective</text>
+  <text x="500" y="70" class="subtitle" text-anchor="middle">Preventing destructive policy updates by bounding the probability ratio</text>
+
+  <!-- Math Equation Box -->
+  <rect x="150" y="90" width="700" height="80" class="math-box box-shadow" />
+  <text x="500" y="125" class="math-text" text-anchor="middle">L^{CLIP}(θ) = E_t [ min( r_t(θ)A_t, clip(r_t(θ), 1-ε, 1+ε)A_t ) ]</text>
+  <text x="500" y="150" class="math-desc" text-anchor="middle">Where r_t(θ) = π_θ(a|s) / π_θ_old(a|s) is the probability ratio</text>
+
+  <!-- ========================================== -->
+  <!-- LEFT PLOT: Advantage > 0                   -->
+  <!-- ========================================== -->
+  <g transform="translate(0, 0)">
+    <text x="275" y="210" class="pos-title">Advantage (A) &gt; 0</text>
+    <text x="275" y="230" class="subtitle" text-anchor="middle" font-size="13px">Action was better than average</text>
+
+    <!-- Trust Region Shading -->
+    <!-- X: 1-e=245, 1=275, 1+e=305 -->
+    <rect x="245" y="250" width="60" height="200" class="trust-region" />
+    <text x="275" y="265" font-size="12px" fill="#1864ab" font-weight="bold" text-anchor="middle">Trust Region</text>
+
+    <!-- Axes -->
+    <line x1="125" y1="450" x2="450" y2="450" class="axis" />
+    <line x1="125" y1="450" x2="125" y2="250" class="axis" />
+
+    <!-- Grid Lines & Ticks -->
+    <line x1="125" y1="350" x2="275" y2="350" class="grid" />
+    <line x1="275" y1="450" x2="275" y2="350" class="grid" />
+    
+    <line x1="125" y1="330" x2="305" y2="330" class="grid" />
+    <line x1="305" y1="450" x2="305" y2="330" class="grid" />
+    
+    <line x1="245" y1="450" x2="245" y2="435" class="grid" />
+
+    <!-- Axis Labels -->
+    <text x="287" y="490" class="axis-label">Probability Ratio r_t(θ)</text>
+    <text x="80" y="350" class="axis-label" transform="rotate(-90 80,350)">Objective L</text>
+
+    <!-- Tick Labels -->
+    <text x="125" y="468" class="tick-label">0</text>
+    <text x="245" y="468" class="tick-label">1-ε</text>
+    <text x="275" y="468" class="tick-label">1.0</text>
+    <text x="305" y="468" class="tick-label">1+ε</text>
+    
+    <text x="110" y="354" class="tick-label" text-anchor="end">A</text>
+    <text x="110" y="334" class="tick-label" text-anchor="end">(1+ε)A</text>
+
+    <!-- Unclipped Line -->
+    <line x1="125" y1="450" x2="425" y2="150" class="line-unclipped" />
+
+    <!-- Clipped Line -->
+    <path d="M 125 450 L 305 330 L 425 330" class="pos-line" />
+    
+    <!-- Dots & Annotation -->
+    <circle cx="275" cy="350" r="4" class="pos-dot" />
+    <circle cx="305" cy="330" r="4" class="pos-dot" />
+    <text x="360" y="315" class="pos-text">Clipped at (1+ε)A</text>
+
+    <!-- Intuition Box -->
+    <rect x="75" y="520" width="400" height="110" class="intuition-box box-shadow" />
+    <text x="95" y="545" class="intuition-title">Intuition: Limiting "Greed"</text>
+    <text x="95" y="565" class="intuition-text">When an action yields a positive return, PPO</text>
+    <text x="95" y="585" class="intuition-text">increases its probability. However, once the</text>
+    <text x="95" y="605" class="intuition-text">probability ratio hits <tspan font-weight="bold">1+ε</tspan>, the objective</text>
+    <text x="95" y="625" class="intuition-text">function flatlines, halting further updates.</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- RIGHT PLOT: Advantage < 0                  -->
+  <!-- ========================================== -->
+  <g transform="translate(0, 0)">
+    <text x="725" y="210" class="neg-title">Advantage (A) &lt; 0</text>
+    <text x="725" y="230" class="subtitle" text-anchor="middle" font-size="13px">Action was worse than average</text>
+
+    <!-- Trust Region Shading -->
+    <!-- X: 1-e=695, 1=725, 1+e=755 -->
+    <rect x="695" y="250" width="60" height="200" class="trust-region" />
+    <text x="725" y="265" font-size="12px" fill="#1864ab" font-weight="bold" text-anchor="middle">Trust Region</text>
+
+    <!-- Axes -->
+    <line x1="575" y1="250" x2="900" y2="250" class="axis" />
+    <line x1="575" y1="250" x2="575" y2="450" class="axis" />
+
+    <!-- Grid Lines & Ticks -->
+    <line x1="575" y1="350" x2="725" y2="350" class="grid" />
+    <line x1="725" y1="250" x2="725" y2="350" class="grid" />
+    
+    <line x1="575" y1="330" x2="695" y2="330" class="grid" />
+    <line x1="695" y1="250" x2="695" y2="330" class="grid" />
+
+    <line x1="755" y1="250" x2="755" y2="370" class="grid" />
+
+    <!-- Axis Labels -->
+    <text x="737" y="490" class="axis-label">Probability Ratio r_t(θ)</text>
+    <text x="530" y="350" class="axis-label" transform="rotate(-90 530,350)">Objective L</text>
+
+    <!-- Tick Labels -->
+    <text x="575" y="235" class="tick-label">0</text>
+    <text x="695" y="235" class="tick-label">1-ε</text>
+    <text x="725" y="235" class="tick-label">1.0</text>
+    <text x="755" y="235" class="tick-label">1+ε</text>
+    
+    <text x="560" y="354" class="tick-label" text-anchor="end">A</text>
+    <text x="560" y="334" class="tick-label" text-anchor="end">(1-ε)A</text>
+
+    <!-- Unclipped Line -->
+    <line x1="575" y1="250" x2="875" y2="450" class="line-unclipped" />
+
+    <!-- Clipped Line -->
+    <path d="M 575 330 L 695 330 L 875 450" class="neg-line" />
+    
+    <!-- Dots & Annotation -->
+    <circle cx="725" cy="350" r="4" class="neg-dot" />
+    <circle cx="695" cy="330" r="4" class="neg-dot" />
+    <text x="630" y="315" class="neg-text" text-anchor="middle">Clipped at (1-ε)A</text>
+    
+    <text x="825" y="405" font-size="13px" fill="#adb5bd" font-style="italic" text-anchor="middle">Unclipped region</text>
+    <text x="825" y="420" font-size="12px" fill="#adb5bd" text-anchor="middle">(Full penalty applied)</text>
+
+    <!-- Intuition Box -->
+    <rect x="525" y="520" width="400" height="110" class="intuition-box box-shadow" />
+    <text x="545" y="545" class="intuition-title">Intuition: Limiting "Panic"</text>
+    <text x="545" y="565" class="intuition-text">When an action is bad, PPO drastically decreases</text>
+    <text x="545" y="585" class="intuition-text">its probability. If the ratio drops to <tspan font-weight="bold">1-ε</tspan>, the clip</text>
+    <text x="545" y="605" class="intuition-text">activates on the lower bound, preventing a</text>
+    <text x="545" y="625" class="intuition-text">single terrible action from destroying the policy.</text>
+  </g>
+</svg>
